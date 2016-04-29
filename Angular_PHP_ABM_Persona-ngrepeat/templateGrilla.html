@@ -1,0 +1,71 @@
+<div class="container">
+		<div class="page-header">
+			<center><h1>ABM - PHP - Angular</h1> </center>     
+</div>
+	  	 
+		           
+<div class="CajaInicio animated bounceInRight">
+		<h1>Listado de personas</h1>
+		<!-- id="listaPersonas" -->
+			<input type="search" placeholder="Buscar Persona" ng-model="miFiltro"/>
+			<table class='table table-hover table-responsive' id="listaPersonas">
+				<thead>
+					<tr>
+						<th>  Foto   </th>				
+						<th>  Nombre     </th>
+						<th>  Apellido   </th>
+						<th>  Dni        </th>
+						<th>  BORRAR     </th>
+						<th>  MODIFICAR  </th>
+					</tr> 
+				</thead>
+				<tbody>
+				<tr ng-repeat="persona in ListadoPersonas|filter:miFiltro as resultado" contenteditable="{{editmode ? true : false}}">
+
+					<td><img  class='fotoGrilla' ng-src="fotos/{{persona.foto}}" /></td>
+		
+					<td>{{persona.nombre}}</td>
+					<td>{{persona.apellido}}</td>
+					<td>{{persona.dni}}</td>
+
+					<td><button class='btn btn-danger' name='Borrar' ng-click="Borrar(persona.id)">   <span class='glyphicon glyphicon-remove-circle'>&nbsp;</span>Borrar</button></td>
+					
+					<td><button class='btn btn-warning' name='Modificar' ui-sref="modificar({id:persona.id,nombre:persona.nombre,apellido:persona.apellido,dni:persona.dni,foto:persona.foto})"><span class='glyphicon glyphicon-edit'>&nbsp;</span>Modificar</button></td>
+					
+					
+				</tr>
+				
+				<tr ng-show="modificar">
+					<td><input type="hidden" ng-model="nuevoId"/></td>
+
+					<td><input style="font-size:18px" type="text" ng-model="nuevoNombre"/></td>
+
+					<td><input style="font-size:18px" type="text" ng-model="nuevoApellido"/></td>
+
+					<td><input style="font-size:18px" type="text" ng-model="nuevoDni"/></td>
+
+					<td>
+						<input class='btn btn-warning' name='Borrar' type="button" ng-click="modify()" value="Modificar"/>
+					</td>
+				</tr>
+				
+				
+				<tr ng-if="resultado.length==0">
+
+					<td>{{current.persona}}</td>
+		
+					<td>No existen personas con esos datos</td>
+					<td></td>
+					<td></td>
+
+					<td></td>
+					
+					<td></td>
+										
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+</div>
